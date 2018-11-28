@@ -10,14 +10,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Calculator {
-    public void run() throws InvalidExpressionException {
-        System.out.print("Claculator started!\n:");
-        Scanner scanner = new Scanner(System.in);
-        double result = calculate(scanner.nextLine());
-        System.out.println(">" + result);
+//    public void run() throws InvalidExpressionException {
+//        System.out.print("Claculator started!\n:");
+//        Scanner scanner = new Scanner(System.in);
+//        double result = calculate(scanner.nextLine());
+//        System.out.println(">" + result);
+//    }
+
+    public void run(String expression) throws InvalidExpressionException {
+        System.out.print(String.format("\nClaculator started!\n: %s", expression));
+        double result = calculate(expression);
+        System.out.println("\n>" + result);
     }
 
-    private double calculate(String line) throws InvalidExpressionException {
+    public double calculate(String line) throws InvalidExpressionException {
         RPN rpn = getRpn(line);
         double result = 0;
         Deque<Double> tempStack = new ArrayDeque<>();
@@ -48,7 +54,7 @@ public class Calculator {
         return tempStack.peek();
     }
 
-    private RPN getRpn(String line) throws InvalidExpressionException {
+    public RPN getRpn(String line) throws InvalidExpressionException {
         MyExpression expression = new MyExpression(line);
         expression.removeSpaces();
         LineParser parser = new LineParser();
